@@ -1,0 +1,103 @@
+@use '../abstracts/variables' as *;
+
+// ============================================================
+// BASE: Keyframe Animations
+// ============================================================
+
+// ── Scroll entrance (progressive enhancement) ────────────────
+// Elements are ALWAYS visible by default.
+// .is-visible triggers the entrance animation via JS observer.
+@keyframes fadeUpIn {
+  from { opacity: 0;   transform: translateY(24px); }
+  to   { opacity: 1;   transform: translateY(0);    }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0;   transform: translateX(-24px); }
+  to   { opacity: 1;   transform: translateX(0);     }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0;   transform: translateX(24px); }
+  to   { opacity: 1;   transform: translateX(0);    }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+// ── Hero dot blink ────────────────────────────────────────────
+@keyframes blink {
+  0%, 100% { opacity: 1;    }
+  50%       { opacity: 0.3; }
+}
+
+// ── Floating bob ──────────────────────────────────────────────
+@keyframes float {
+  0%, 100% { transform: translateY(0);     }
+  50%       { transform: translateY(-10px); }
+}
+
+// ── Subtle hero gradient pulse ────────────────────────────────
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%;   }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%;   }
+}
+
+// ── Gold shimmer on skill pills ───────────────────────────────
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+// ── Skill pill wave stagger ───────────────────────────────────
+@keyframes pillPop {
+  0%   { opacity: 0; transform: scale(0.8) translateY(6px); }
+  60%  { transform: scale(1.06) translateY(-2px);           }
+  100% { opacity: 1; transform: scale(1) translateY(0);     }
+}
+
+// ── Cursor ring pulse ─────────────────────────────────────────
+@keyframes cursorPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.7; }
+  50%       { transform: translate(-50%, -50%) scale(1.35); opacity: 0.35; }
+}
+
+// ── Timeline dot pulse ────────────────────────────────────────
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba($gold, 0.25); }
+  50%       { box-shadow: 0 0 0 6px rgba($gold, 0.12); }
+}
+
+// ── Spinner ───────────────────────────────────────────────────
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Entrance class bindings ───────────────────────────────────
+.fade-up,
+.fade-left,
+.fade-right,
+.scale-in {
+  // All intentionally empty – elements are visible by default.
+  // JS adds .is-visible which triggers the animation.
+}
+
+.fade-up.is-visible    { animation: fadeUpIn    0.55s ease both; }
+.fade-left.is-visible  { animation: fadeInLeft  0.55s ease both; }
+.fade-right.is-visible { animation: fadeInRight 0.55s ease both; }
+.scale-in.is-visible   { animation: scaleIn     0.5s  ease both; }
+
+// Stagger delays
+.delay-1 { animation-delay: 0.08s;  }
+.delay-2 { animation-delay: 0.16s;  }
+.delay-3 { animation-delay: 0.24s;  }
+.delay-4 { animation-delay: 0.32s;  }
+.delay-5 { animation-delay: 0.40s;  }

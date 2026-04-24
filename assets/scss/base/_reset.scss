@@ -1,0 +1,66 @@
+@use '../abstracts/variables' as *;
+
+// ============================================================
+// BASE: Reset
+// ============================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: $gold $navy-dark;
+}
+
+body {
+  font-family: $font-body;
+  font-size: $text-base;
+  line-height: 1.7;
+  background: $navy;
+  color: $white;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // Hide default cursor when custom cursor is active
+  &.has-custom-cursor {
+    cursor: none;
+
+    a, button, [role="button"], input, textarea, select, label,
+    .skill-pill, .offer-card, .timeline-card, .testi-card, .edu-card {
+      cursor: none;
+    }
+  }
+}
+
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+input, textarea, select { font: inherit; }
+h1, h2, h3, h4, h5, h6 { font-family: $font-head; line-height: 1.2; }
+
+:focus-visible {
+  outline: 2px solid $gold;
+  outline-offset: 3px;
+  border-radius: $radius-sm;
+}
+
+// Webkit scrollbar
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: $navy-dark; }
+::-webkit-scrollbar-thumb  { background: $gold; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: $gold-light; }
+
+// Selection color
+::selection {
+  background: rgba($gold, 0.25);
+  color: $white;
+}

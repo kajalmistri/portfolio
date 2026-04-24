@@ -1,0 +1,50 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+// LAYOUT: Footer
+// ============================================================
+
+.footer {
+  background: $navy-dark;
+  border-top: 1px solid rgba($gold, 0.1);
+  padding: $space-10 0;
+  text-align: center;
+}
+
+.footer__text {
+  font-size: $text-sm;
+  color: rgba($white, 0.35);
+  line-height: 1.7;
+
+  span {
+    color: $gold;
+    font-weight: 600;
+  }
+}
+
+.footer__links {
+  display: flex;
+  justify-content: center;
+  gap: $space-4;
+  margin-top: $space-3;
+}
+
+.footer__link {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background: rgba($white, 0.05);
+  border: 1px solid rgba($white, 0.1);
+  @include flex-center;
+  font-size: $text-sm;
+  color: rgba($white, 0.5);
+  @include transition(background, color, border-color, transform);
+
+  &:hover {
+    background: $gold-dim;
+    border-color: $gold;
+    color: $gold;
+    transform: translateY(-3px);
+  }
+}

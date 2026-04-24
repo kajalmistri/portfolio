@@ -1,0 +1,159 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+// LAYOUT: Navigation
+// ============================================================
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: $z-nav;
+  padding: $space-5 0;
+  @include transition(background, padding, box-shadow);
+
+  &.scrolled {
+    background: rgba($navy-dark, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: $space-3 0;
+    box-shadow: 0 1px 0 rgba($gold, 0.1), 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.nav__inner {
+  @include container;
+  @include flex-between;
+  gap: $space-6;
+}
+
+// ── Logo ──────────────────────────────────────────────────────
+.nav__logo {
+  font-family: $font-head;
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $gold;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+  @include transition(opacity);
+
+  &:hover { opacity: 0.85; }
+}
+
+// ── Desktop links ─────────────────────────────────────────────
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+
+  @include respond(md) { display: none; }
+}
+
+.nav__link {
+  position: relative;
+  padding: $space-2 $space-4;
+  font-size: $text-sm;
+  font-weight: 500;
+  color: rgba($white, 0.75);
+  border-radius: $radius-sm;
+  @include transition(color, background);
+
+  // Animated underline
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: $space-4;
+    right: $space-4;
+    height: 2px;
+    background: $gold;
+    border-radius: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
+    @include transition(transform);
+  }
+
+  &:hover {
+    color: $white;
+    &::after { transform: scaleX(1); }
+  }
+
+  &.active {
+    color: $gold;
+    font-weight: 600;
+    &::after { transform: scaleX(1); }
+  }
+}
+
+// ── Hamburger ─────────────────────────────────────────────────
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba($white, 0.2);
+  border-radius: $radius-sm;
+  flex-shrink: 0;
+  @include transition(border-color);
+
+  span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: $white;
+    margin-inline: auto;
+    border-radius: 2px;
+    @include transition(transform, opacity, width);
+  }
+
+  &:hover { border-color: $gold; }
+
+  &.open {
+    border-color: $gold;
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; width: 0; }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+
+  @include respond(md) { display: flex; }
+}
+
+// ── Mobile drawer ─────────────────────────────────────────────
+.nav__mobile {
+  display: none;
+  flex-direction: column;
+  background: $navy-dark;
+  border-top: 1px solid rgba($gold, 0.12);
+  padding: $space-6;
+  gap: $space-1;
+
+  &.open { display: flex; }
+}
+
+.nav__mobile-link {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  font-size: $text-base;
+  font-weight: 500;
+  color: rgba($white, 0.8);
+  border-radius: $radius-md;
+  @include transition(background, color);
+
+  i {
+    color: $gold;
+    width: 18px;
+    opacity: 0.8;
+    font-size: $text-sm;
+  }
+
+  &:hover,
+  &.active {
+    background: rgba($gold, 0.08);
+    color: $gold;
+    i { opacity: 1; }
+  }
+}

@@ -1,0 +1,77 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+// BASE: Typography
+// ============================================================
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $text-xs;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $gold;
+  margin-bottom: $space-3;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 2px;
+    background: $gold;
+    flex-shrink: 0;
+  }
+
+  &--center {
+    justify-content: center;
+  }
+}
+
+.section-title {
+  font-family: $font-head;
+  @include fluid-type(1.75rem, 2.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: $space-5;
+  color: $white;
+
+  &--dark { color: $text-dark; }
+}
+
+.section-desc {
+  font-size: $text-lg;
+  line-height: 1.8;
+  color: $text-faint;
+  max-width: 620px;
+
+  &--dark { color: $text-muted; }
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: $space-12;
+
+  .section-label { justify-content: center; }
+  .section-desc  { margin-inline: auto; }
+}
+
+.divider {
+  width: 52px;
+  height: 3px;
+  background: linear-gradient(90deg, $gold, $gold-light);
+  border-radius: 2px;
+  margin-bottom: $space-6;
+
+  &--center { margin-inline: auto; }
+}
+
+.text-gold      { color: $gold; }
+.text-gold-bold { color: $gold; font-weight: 700; }
+
+// Gold gradient text
+.gradient-text {
+  @include gold-text;
+}

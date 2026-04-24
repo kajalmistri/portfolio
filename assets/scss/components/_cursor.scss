@@ -1,0 +1,106 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+// COMPONENT: Custom Cursor
+// ============================================================
+
+// Hide default OS cursor when active (set on <body> by JS)
+// body.has-custom-cursor is set in _reset.scss
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: $gold;
+  border-radius: $radius-full;
+  pointer-events: none;
+  z-index: $z-cursor;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease,
+              background 0.2s ease, opacity 0.2s ease;
+  will-change: transform;
+
+  // When hovering interactive elements
+  &.is-hovering {
+    width: 12px;
+    height: 12px;
+    background: $gold-light;
+  }
+
+  // When clicked
+  &.is-clicking {
+    width: 6px;
+    height: 6px;
+    background: $white;
+  }
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba($gold, 0.6);
+  border-radius: $radius-full;
+  pointer-events: none;
+  z-index: $z-cursor - 1;
+  transform: translate(-50%, -50%);
+  // Ring lags behind (handled by JS lerp), only transitions size changes
+  transition: width 0.35s $ease-bounce,
+              height 0.35s $ease-bounce,
+              border-color 0.25s ease,
+              opacity 0.25s ease;
+  will-change: transform;
+
+  // When hovering interactive elements
+  &.is-hovering {
+    width: 56px;
+    height: 56px;
+    border-color: rgba($gold, 0.35);
+    // Subtle background tint
+    background: rgba($gold, 0.04);
+  }
+
+  // When hovering a button specifically
+  &.is-on-btn {
+    width: 64px;
+    height: 64px;
+    border-color: rgba($gold, 0.5);
+    background: rgba($gold, 0.06);
+    // Rotate animation
+    animation: cursorPulse 1.8s ease-in-out infinite;
+  }
+
+  // When clicked
+  &.is-clicking {
+    width: 28px;
+    height: 28px;
+    border-color: rgba($gold-light, 0.8);
+  }
+}
+
+// Trailing dot (3rd element for extra depth)
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background: rgba($gold, 0.4);
+  border-radius: $radius-full;
+  pointer-events: none;
+  z-index: $z-cursor - 2;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+// Mobile: hide custom cursor
+@include respond(md) {
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-trail { display: none; }
+}

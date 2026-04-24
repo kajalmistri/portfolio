@@ -1,0 +1,144 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+// LAYOUT: Hero Section
+// ============================================================
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6rem;
+  padding-bottom: $space-16;
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(ellipse 70% 55% at 65% 45%, rgba($gold, 0.07) 0%, transparent 60%),
+    linear-gradient(160deg, $navy-dark 0%, $navy 55%, #0D2137 100%);
+
+  // Dot grid
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba($gold, 0.14) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events: none;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  // Decorative glowing orb
+  &::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: $radius-full;
+    right: -150px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: radial-gradient(circle at center, rgba($gold, 0.06) 0%, transparent 65%);
+    pointer-events: none;
+    animation: float 8s ease-in-out infinite;
+
+    @include respond(md) { display: none; }
+  }
+}
+
+.hero__inner {
+  @include container;
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+}
+
+// ── Eyebrow badge ─────────────────────────────────────────────
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-1 $space-4;
+  background: rgba($gold, 0.1);
+  border: 1px solid $gold-border;
+  border-radius: $radius-full;
+  font-size: $text-xs;
+  font-weight: 600;
+  color: $gold;
+  letter-spacing: 0.06em;
+  margin-bottom: $space-6;
+
+  // Pulsing live dot
+  &::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: $gold;
+    border-radius: $radius-full;
+    animation: blink 2s infinite;
+    flex-shrink: 0;
+  }
+}
+
+// ── Headline ─────────────────────────────────────────────────
+.hero__title {
+  font-family: $font-head;
+  @include fluid-type(2.2rem, 3.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: $white;
+  margin-bottom: $space-5;
+
+  em {
+    font-style: normal;
+    @include gold-text;
+  }
+}
+
+// ── Sub copy ──────────────────────────────────────────────────
+.hero__sub {
+  font-size: $text-lg;
+  color: rgba($white, 0.68);
+  line-height: 1.85;
+  max-width: 580px;
+  margin-bottom: $space-8;
+}
+
+// ── Tagline ───────────────────────────────────────────────────
+.hero__tagline {
+  display: inline-block;
+  font-size: $text-sm;
+  font-style: italic;
+  color: rgba($white, 0.42);
+  margin-top: $space-8;
+  padding-top: $space-5;
+  border-top: 1px solid rgba($white, 0.1);
+
+  span {
+    color: $gold;
+    font-style: normal;
+    font-weight: 600;
+  }
+}
+
+// ── Scroll cue ───────────────────────────────────────────────
+.hero__scroll-cue {
+  position: absolute;
+  bottom: $space-8;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  font-size: $text-xs;
+  color: rgba($white, 0.35);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: float 2.5s ease-in-out infinite;
+
+  i { color: $gold; font-size: $text-base; }
+
+  @include respond(md) { display: none; }
+}

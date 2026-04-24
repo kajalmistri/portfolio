@@ -1,0 +1,13 @@
+{
+  "name": "kajal-mistry-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio site for Kajal Mistry – Senior Business Development Manager",
+  "scripts": {
+    "sass": "sass assets/scss/main.scss assets/css/main.css --style=expanded",
+    "watch": "sass assets/scss/main.scss assets/css/main.css --watch --style=expanded",
+    "build": "sass assets/scss/main.scss assets/css/main.css --style=compressed"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}

@@ -1,0 +1,77 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+// COMPONENT: Buttons
+// ============================================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: 0.8rem 1.9rem;
+  font-family: $font-body;
+  font-size: $text-base;
+  font-weight: 600;
+  border-radius: $radius-md;
+  border: 2px solid transparent;
+  min-height: 44px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  @include transition(background, color, border-color, box-shadow, transform);
+
+  // Ripple layer
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($white, 0.1);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  &:hover::after { opacity: 1; }
+  &:active        { transform: scale(0.97); }
+
+  i { font-size: 0.9em; }
+}
+
+// Primary – gold filled
+.btn-primary {
+  background: linear-gradient(135deg, $gold, $gold-light);
+  color: $navy-dark;
+  box-shadow: $shadow-gold;
+
+  &:hover {
+    background: linear-gradient(135deg, $gold-light, $gold);
+    box-shadow: 0 6px 28px rgba($gold, 0.4);
+    transform: translateY(-2px);
+  }
+}
+
+// Outline – gold border
+.btn-outline {
+  background: transparent;
+  color: $gold;
+  border-color: $gold;
+
+  &:hover {
+    background: $gold;
+    color: $navy-dark;
+    box-shadow: $shadow-gold;
+    transform: translateY(-2px);
+  }
+}
+
+// Group
+.btn-group {
+  display: flex;
+  gap: $space-4;
+  flex-wrap: wrap;
+  align-items: center;
+
+  @include respond(sm) {
+    flex-direction: column;
+    .btn { width: 100%; justify-content: center; }
+  }
+}
